@@ -23,4 +23,26 @@ public class PeliculasServicelmpl implements PeliculasService {
     public Optional<Peliculas> getPeliculaById(Long id) {
         return peliculasRepository.findById(id);
     }
+
+    @Override
+    public Peliculas savePelicula(Peliculas pelicula) {
+        return peliculasRepository.save(pelicula);
+    }
+
+    @Override
+    public Peliculas updatePelicula(Long id, Peliculas pelicula) {
+        if(peliculasRepository.existsById(id)) {
+            pelicula.setId(id);
+            return peliculasRepository.save(pelicula);
+        }
+        else {
+            return null;
+        }
+    }
+
+    @Override
+    public void deletePeliculaById(Long id) {
+        peliculasRepository.deleteById(id);
+    }
+
 }
